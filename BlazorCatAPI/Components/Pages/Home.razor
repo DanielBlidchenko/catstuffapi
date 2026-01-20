@@ -68,7 +68,13 @@
             
             client.DefaultRequestHeaders.Clear();
 
-            var ApiKey = Configuration["CatApiKey"]; 
+            var ApiKey = Configuration["CatApiKey"];
+
+            if (string.IsNullOrEmpty(ApiKey))
+            {
+                errorMessage = "Api key is missing. Please configure the application environment";
+                return;
+            }
             
             client.DefaultRequestHeaders.Add("x-api-key", ApiKey);
             
